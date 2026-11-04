@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonlit Library</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <div class="admin">
+        <div class="row1">
+            <p><span>root@Library-admin </span>: ~$ ./dashboard --Live</p>
+            <div class="row1-a">
+                <p>pending 3</p>
+                <p>books 128</p>
+                <div>online</div>
+            </div>
+        </div>
+        <div class="row2">
+            <p class="gold">[1] requests</p>
+            <p>[2] add_book</p>
+            <p>[3] inventory</p>
+            <p class="green">[4] logout</p>
+        </div>
+        <div class="row3">
+            <p class="blue">PENDING_REQUESTS</p>
+            <div class="requests">
+                <div class="userRequest">
+                    <p>#001 user: Nica wants "Moonlit Sword" 2026-11-03 08:41</p>
+                    <div class="userReqBtns">
+                        <button class="approve">APPROVE</button>
+                        <button class="reject red">REJECT</button>
+                    </div>
+                </div>
+                <div class="userRequest">
+                    <p>#002 user: Nica wants "Moonlit Sword" 2026-11-03 08:41</p>
+                    <div class="userReqBtns">
+                        <button class="approve">APPROVE</button>
+                        <button class="reject red">REJECT</button>
+                    </div>
+                </div>
+                <div class="userRequest">
+                    <p>#003 user: Nica wants "Moonlit Sword" 2026-11-03 08:41</p>
+                    <div class="userReqBtns">
+                        <button class="approve">APPROVE</button>
+                        <button class="reject red">REJECT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row4">
+            <div class="addBook">
+                <p class="blue"> > ADD_BOOK</p>
+                <form class="addBookForm">
+                    <label for="title">title:</label>
+                    <input type="text" class="title" id="title" name="title" placeholder="enter title_">
+                    <label for="author">author:</label>
+                    <input type="text" class="author" id="author" name="author" placeholder="enter author_">
+                    <label for="read">read:</label>
+                    <input type="text" class="read" id="read" name="read" placeholder="enter read_">
+                    <label for="copies">copies:</label>
+                    <input type="text" class="copies" id="copies" name="copies" placeholder="1">
+                    <button>SAVE_BOOK</button>
+                </form>
+            </div>
+            <div class="inventory">
+                <p class="blue"> > INVENTORY</p>
+                <div class="bookLists">
+                    <div class="book">
+                        <p>001 Moonlit Sword x2</p>
+                        <button class="delete red">DELETE</button>
+                    </div>
+                    <div class="book">
+                        <p>002 Moonlit Sword x2</p>
+                        <button class="delete red">DELETE</button>
+                    </div>
+                    <div class="book">
+                        <p>003 Moonlit Sword x2</p>
+                        <button class="delete red">DELETE</button>
+                    </div>
+                    <div class="book">
+                        <p>004 Moonlit Sword x2</p>
+                        <button class="delete red">DELETE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+
+</html>

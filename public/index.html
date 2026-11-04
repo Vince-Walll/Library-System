@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moonlit Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="library">
+        <form class="form" id="logInForm">
+            <h1>Moonlit Library</h1>
+            <p>Welcome back, reader!</p>
+            <label for="email">Email</label>
+            <input type="email" class="email" id="email" name="email" placeholder="you@gmail.com" required>
+            <label for="password">Password</label>
+            <input type="password" class="password" id="password" name="password" placeholder="*********" required>
+            <button type="submit" class="logIn pink" id="logIn">Log in</button>
+            <p>New here? <span id="goToCreateAcc">Create an account</span></p>
+        </form>
+        <form class="form hidden" id="createAccForm">
+            <h1>Join the Library</h1>
+            <label for="name">Name</label>
+            <input type="text" class="name" id="name" name="name" placeholder="Your name" required>
+            <label for="newEmail">Email</label>
+            <input type="email" class="newEmail" id="newEmail" name="email" placeholder="you@gmail.com" required>
+            <label for="newPassword">Password</label>
+            <input type="password" class="newPassword" id="newPassword" name="password" placeholder="*********"
+                required>
+            <label for="newPassword2">Confirm password</label>
+            <input type="password" class="newPassword2" id="newPassword2" name="password2" placeholder="*********"
+                required>
+            <button type="submit" class="createAcc green" id="createAcc">Create account</button>
+            <p>Have an account? <span id="goToLogIn">Log in</span></p>
+        </form>
+        <script src="script.js"></script>
+    </div>
+</body>
+
+</html>
