@@ -13,20 +13,21 @@
         <div class="row1">
             <h1>Moonlit Library</h1>
             <div class="row1-a">
-                <button class="home yellow">Home</button>
-                <button class="request">Request</button>
+                <button class="home yellow" id="navHome">Home</button>
+                <button class="request" id="navReq">Request</button>
                 <button class="logOut" id="logOut">Log out</button>
             </div>
         </div>
-        <div class="row2">
-            <input type="search" class="searchInput" placeholder="Search title, author or genre...">
-            <button class="searchBtn">Search</button>
-        </div>
+        <form class="row2" id="row2Form">
+            <input type="search" class="searchInput" id="searchInput" name="searching"
+                placeholder="Search title, author or genre...">
+            <button type="submit" class="searchBtn" id="searchBtn">Search</button>
+        </form>
         <div class="row3">
-            <button class="genre pink">All</button>
-            <button class="genre">Manga</button>
-            <button class="genre">Fantasy</button>
-            <button class="genre">Romance</button>
+            <button class="genre" id="all">All</button>
+            <button class="genre" onclick="searchBooks('Manga')">Manga</button>
+            <button class="genre" onclick="searchBooks('Fantasy')">Fantasy</button>
+            <button class="genre" onclick="searchBooks('Romance')">Romance</button>
         </div>
         <div class="books" id="books">
         </div>

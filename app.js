@@ -2,6 +2,7 @@ const { error } = require('console');
 const express = require('express');
 const fs = require('fs');
 const app = express();
+let admin = false;
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -19,11 +20,14 @@ app.post('/log-in', (req, res) => {
     }
     if (accounts.find(acc => acc.email === req.body.email.trim() && acc.password === req.body.password.trim())) {
         if (req.body.email.trim() === 'admin@gmail.com' && req.body.password.trim() === 'admin') {
+            admin = true;
             res.status(201).json({ found: true, admin: true });
         } else {
+            admin = false;
             res.status(201).json({ found: true, admin: false });
         }
     } else {
+        admin = false;
         res.status(401).json({ found: false, admin: false, error: 'Wrong Email or Password' });
     }
 });
@@ -74,6 +78,7 @@ app.get('/books', (req, res) => {
     res.status(201).json(books);
 });
 app.post('/books', (req, res) => {
+    if (!admin) return res.status(403).json({ error: "admin access is required" });
     let books = [];
     try {
         if (fs.existsSync('books.json')) {
@@ -113,6 +118,7 @@ app.post('/books', (req, res) => {
     res.status(201).json({ message: 'Book added successfully' });
 });
 app.delete('/books/:title', (req, res) => {
+    if (!admin) return res.status(403).json({ error: "admin access is required" });
     let books = [];
     try {
         if (fs.existsSync('books.json')) {
@@ -132,11 +138,11 @@ app.delete('/books/:title', (req, res) => {
     res.status(201).json({ message: req.params.title + ' was deleted' });
 });
 app.all('/books', (req, res) => {
-    res.status(401).json({ error: 'Invalid Method' });
+    res.status(400).json({ error: 'Invalid Method' });
 });
 app.use((err, req, res, next) => {
     console.log(err.message + ' last');
-    res.status(401).json({ error: 'Invalid Request' });
+    res.status(404).json({ error: 'Page not found' });
 });
 app.listen(3000, () => {
     console.log('Server is running...');
