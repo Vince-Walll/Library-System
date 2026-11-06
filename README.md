@@ -19,14 +19,17 @@ A fullstack library management app built with **Node.js**, **Express**, and vani
 ### Reader side (`client.html`)
 - Log in or create an account
 - Browse the book list, loaded from the server
-- Read and Borrow buttons on each book (in progress)
+- Book list refreshes itself every 5 seconds
+- Read and Borrow buttons on each book (interface only, not connected yet)
 - Search and genre filters (planned)
 - "My borrow requests" list (planned)
 
 ### Admin side (`admin.html`)
 - Terminal-style dashboard
-- Pending borrow requests with Approve and Reject buttons (planned)
-- Add a book and delete a book (planned)
+- Add a book with title, author, description, and number of copies
+- Delete a book from the inventory
+- Inventory loads from the server and refreshes every 5 seconds
+- Pending borrow requests with Approve and Reject buttons (interface only, planned)
 
 ## Tech stack
 
@@ -68,7 +71,7 @@ cd Library-System
 npm install
 ```
 
-Create two data files in the project folder, saved as **UTF-8**:
+Create two data files in the project folder, saved as **UTF-8**.
 
 `books.json`
 ```json
@@ -78,9 +81,11 @@ Create two data files in the project folder, saved as **UTF-8**:
 `accounts.json`
 ```json
 [
-  { "name": "Admin", "email": "admin@example.com", "password": "change-me", "admin": true }
+  { "name": "Admin", "email": "admin@gmail.com", "password": "admin" }
 ]
 ```
+
+The server treats the account with the email `admin@gmail.com` and the password `admin` as the admin. This is hardcoded in `app.js` for now (see Known issues).
 
 Start the server:
 
@@ -90,15 +95,31 @@ node app.js
 
 Then open `http://localhost:3000`.
 
+## Data format
+
+A book in `books.json`:
+
+```json
+{
+  "title": "Nier",
+  "author": "Natsumi Mukai",
+  "genre": "Manga",
+  "read": "A short description of the book.",
+  "copies": 1
+}
+```
+
 ## API
 
-| Method | Path | Description |
-|---|---|---|
-| GET | `/books` | List all books |
-| POST | `/log-in` | Check credentials, reply with `found` and `admin` |
-| POST | `/create-account` | Create a reader account |
+| Method | Path | Body | Description |
+|---|---|---|---|
+| POST | `/log-in` | `email`, `password` | Replies with `found` and `admin`, or an error |
+| POST | `/create-account` | `name`, `email`, `password`, `password2` | Creates a reader account, `409` if the email exists |
+| GET | `/books` | | List all books |
+| POST | `/books` | `title`, `author`, `read`, `copies` | Add a book (rejects duplicates and bad input) |
+| DELETE | `/books/:title` | | Delete a book by title |
 
-TODO: confirm these against `app.js`, and add the routes you build next (add book, delete book, borrow request, approve, reject).
+Any other method on these paths replies with a JSON error.
 
 ## Planned borrow flow
 
@@ -112,21 +133,26 @@ A borrow request is only allowed on an `available` book, otherwise the server re
 
 ## Known issues
 
-- Admin pages are not protected. Anyone can open `/admin.html` by URL, so the server must verify the user before running admin routes.
-- Passwords are stored as plain text and need hashing before any real use.
-- The admin dashboard still shows placeholder data.
-- Search, filters, Read, and Borrow are not connected to the server yet.
-- Pressing `4` anywhere on the admin page logs you out, including while typing in the Add Book form.
+- **No real authentication.** The admin is detected by a hardcoded email and password in `app.js`, and nothing is remembered after login. Anyone can open `/admin.html` by URL.
+- **Book routes are not protected.** `POST /books` and `DELETE /books/:title` can be called by anyone, for example with curl, so the server must verify the user before running them.
+- **Passwords are stored as plain text** and need hashing before any real use.
+- **Status codes are inconsistent.** Errors mostly reply `401`, and successful reads reply `201`. They should be `400`, `404`, `409`, and `200` where they fit.
+- **Admin dashboard is partly placeholder.** The pending requests, `pending 3`, and `books 128` are static text, and the page has no logout control yet.
+- **Reader page is partly placeholder.** Read, Borrow, Search, the genre filters, and "My borrow requests" are not connected to the server.
+- **The Add Book form has no genre field**, so new books have no genre. A book saved without `copies` shows `x undefined` in the inventory.
+- **The duplicate title check is case-sensitive**, so `Nier` and `nier` count as different books.
 
 ## Roadmap
 
 - [x] Server-side login check
 - [x] Book list loaded from the server
+- [x] Add and delete books (admin)
+- [x] Auto-refresh the book lists
 - [ ] Hash passwords
 - [ ] Sessions or tokens, and protected admin routes (`401` and `403`)
-- [ ] Add and delete books (admin)
 - [ ] Borrow, approve, and reject flow
 - [ ] Search and genre filters
+- [ ] Clean up status codes
 - [ ] Move storage from JSON files to SQLite
 
 ## What I learned
