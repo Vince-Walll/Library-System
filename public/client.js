@@ -4,7 +4,6 @@ const row2Form = document.getElementById('row2Form');
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 const all = document.getElementById('all');
-const manga = document.getElementById('manga');
 const navHome = document.getElementById('navHome');
 const navReq = document.getElementById('navReq');
 const lists = document.getElementById('lists');
