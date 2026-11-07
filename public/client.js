@@ -7,9 +7,25 @@ const all = document.getElementById('all');
 const manga = document.getElementById('manga');
 const navHome = document.getElementById('navHome');
 const navReq = document.getElementById('navReq');
+const lists = document.getElementById('lists');
 let colors = ['pink', 'green', 'yellow', 'blue'];
 let count = 0;
 let getBooks = [];
+let getBorrowedBooks = [];
+let currentUser = '';
+
+fetch('/getCurrentUser')
+    .then(res => res.json())
+    .then(data => {
+        if (localStorage.getItem('currentUser') !== null) {
+            let localUser = JSON.parse(localStorage.getItem('currentUser'));
+            currentUser = localUser.name;
+        } else {
+            localStorage.setItem('currentUser', JSON.stringify({ name: data.currentEmail.slice(0, data.currentEmail.indexOf('@')) }));
+            currentUser = data.currentEmail.slice(0, data.currentEmail.indexOf('@'));
+        }
+        console.log(currentUser);
+    })
 
 navHome.addEventListener('click', () => {
     navHome.classList.toggle('yellow');
@@ -20,6 +36,31 @@ navReq.addEventListener('click', () => {
     navReq.classList.toggle('yellow');
 });
 
+function displayReq(arr) {
+    lists.innerHTML = '';
+    let accList = arr.filter(listed => listed.user === currentUser);
+    for (let book of accList) {
+        const newBorrowBook = document.createElement('div');
+        newBorrowBook.classList.add('borrowBook');
+        lists.appendChild(newBorrowBook);
+        const newTitle = document.createElement('p');
+        newTitle.classList.add('title');
+        newTitle.textContent = book.title;
+        newBorrowBook.appendChild(newTitle);
+        const newBtn = document.createElement('button');
+        newBtn.classList.add('yellow');
+        newBtn.textContent = 'Waiting for admin';
+        newBorrowBook.appendChild(newBtn);
+    }
+}
+function updateReq() {
+    fetch('/borrowedBooks')
+        .then(res => res.json())
+        .then(data => {
+            getBorrowedBooks = data;
+            displayReq(data);
+        })
+}
 function displayBooks(arr) {
     books.innerHTML = '';
     count = 0;
@@ -49,6 +90,26 @@ function displayBooks(arr) {
         const newBorrow = document.createElement('button');
         newBorrow.classList.add('green');
         newBorrow.textContent = "Borrow";
+        newBorrow.addEventListener('click', () => {
+            fetch('/borrow', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    user: currentUser,
+                    title: book.title
+                })
+            })
+                .then(res => {
+                    if (res.ok) {
+                        window.alert('wait for admin approval');
+                        updateReq();
+                    } else (
+                        res.json().then(data => {
+                            window.alert(data.error);
+                        })
+                    )
+                })
+        });
         newBookBtns.appendChild(newBorrow);
         if (count >= 3) {
             count = 0;
@@ -66,6 +127,7 @@ function updateBooks() {
         })
 }
 updateBooks();
+updateReq();
 const refreshBooks = setInterval(() => {
     let isNewBooks = [];
     fetch('/books')
@@ -80,8 +142,23 @@ const refreshBooks = setInterval(() => {
             }
         })
 }, 5000);
+const refBorrowedBooks = setInterval(() => {
+    let isNewBorrowedBooks = [];
+    fetch('/borrowedBooks')
+        .then(res => res.json())
+        .then(data => {
+            isNewBorrowedBooks = data;
+            if (isNewBorrowedBooks.length !== getBorrowedBooks.length) {
+                updateReq();
+                console.log('Borrowed Books List Updated');
+            } else {
+                console.log('No Borrowed Books Update');
+            }
+        })
+}, 5000);
 logOut.addEventListener('click', () => {
     clearInterval(refreshBooks);
+    clearInterval(refBorrowedBooks);
     window.location.href = '/index.html';
 });
 function searchBooks(searched) {

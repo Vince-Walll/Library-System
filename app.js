@@ -23,7 +23,19 @@ app.post('/log-in', (req, res) => {
             admin = true;
             res.status(201).json({ found: true, admin: true });
         } else {
+            let localUser = {};
+            try {
+                if (fs.existsSync('localUser.json')) {
+                    localUser = JSON.parse(fs.readFileSync('localUser.json', 'utf8'));
+                }
+            } catch (err) {
+                console.log(err.message);
+                res.status(401).json({ error: 'Couldnt read file' });
+                return;
+            }
             admin = false;
+            localUser.currentEmail = req.body.email.trim();
+            fs.writeFileSync('localUser.json', JSON.stringify(localUser));
             res.status(201).json({ found: true, admin: false });
         }
     } else {
@@ -62,7 +74,7 @@ app.post('/create-account', (req, res) => {
     res.status(201).json({ message: 'Account Successfully Created', created: true });
 });
 app.all('/create-account', (req, res) => {
-    res.status(401).json({ error: 'Invalid Method' });
+    res.status(405).json({ error: 'Invalid Method' });
 });
 app.get('/books', (req, res) => {
     let books = [];
@@ -101,13 +113,15 @@ app.post('/books', (req, res) => {
         res.status(401).json({ error: 'Description required or Invalid Discription' });
         return;
     }
-    if (req.body.copies <= 0) {
-        res.status(401).json({ error: 'copies atleast one or more' });
+    if (typeof req.body.genre !== 'string' || req.body.genre.trim() === '') {
+        res.status(401).json({ error: 'genre required or Invalid genre' });
         return;
     }
     req.body.title = req.body.title.trim();
     req.body.author = req.body.author.trim();
     req.body.read = req.body.read.trim();
+    req.body.genre = req.body.genre.trim();
+    req.body.available = true;
     if (books.find(book => book.title === req.body.title)) {
         console.log('Book already exist');
         res.status(401).json({ error: 'Book already exist' });
@@ -138,7 +152,69 @@ app.delete('/books/:title', (req, res) => {
     res.status(201).json({ message: req.params.title + ' was deleted' });
 });
 app.all('/books', (req, res) => {
-    res.status(400).json({ error: 'Invalid Method' });
+    res.status(405).json({ error: 'Invalid Method' });
+});
+app.post('/borrow', (req, res) => {
+    let books = [];
+    let borrowList = [];
+    let createdRequest = {
+        "user": req.body.user,
+        "title": req.body.title,
+        "adminApproval": false
+    };
+    try {
+        if (fs.existsSync('books.json') && fs.existsSync('borrowedBooks.json')) {
+            books = JSON.parse(fs.readFileSync('books.json', 'utf8'));
+            borrowList = JSON.parse(fs.readFileSync('borrowedBooks.json', 'utf8'));
+        }
+    } catch (err) {
+        console.log(err.message);
+        res.status(401).json({ error: 'Couldnt read file' });
+        return;
+    }
+    let bookIndex = books.findIndex(book => book.title === req.body.title);
+    if (bookIndex === -1) {
+        res.status(401).json({ error: 'book was not found' });
+        return;
+    }
+    if (!books[bookIndex].available) {
+        res.status(401).json({ error: 'Book is not available' });
+        return;
+    }
+    books[bookIndex].available = false;
+    fs.writeFileSync('books.json', JSON.stringify(books));
+    borrowList.push(createdRequest);
+    fs.writeFileSync('borrowedBooks.json', JSON.stringify(borrowList));
+    res.status(201).json(createdRequest);
+});
+app.all('/borrow', (req, res) => {
+    res.status(401).json({ error: 'invalid Method' });
+});
+app.get('/borrowedBooks', (req, res) => {
+    let borrowedBooks = [];
+    try {
+        if (fs.existsSync('borrowedBooks.json')) {
+            borrowedBooks = JSON.parse(fs.readFileSync('borrowedBooks.json', 'utf8'));
+        }
+    } catch (err) {
+        console.log(err.message + ' /borrowedBooks get');
+        res.status(401).json({ error: 'Couldnt read file' });
+        return;
+    }
+    res.status(201).json(borrowedBooks);
+});
+app.get('/getCurrentUser', (req, res) => {
+    let localUser = {};
+    try {
+        if (fs.existsSync('localUser.json')) {
+            localUser = JSON.parse(fs.readFileSync('localUser.json', 'utf8'));
+        }
+    } catch (err) {
+        console.log(err.message);
+        res.status(401).json({ error: 'couldnt read file' });
+        return;
+    }
+    res.status(201).json(localUser);
 });
 app.use((err, req, res, next) => {
     console.log(err.message + ' last');

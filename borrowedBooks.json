@@ -1,0 +1,27 @@
+[
+    {
+        "user": "nica",
+        "title": "Frieren: Beyond Journey's End",
+        "adminApproval": false
+    },
+    {
+        "user": "client",
+        "title": "The Ancient Magus Bride",
+        "adminApproval": false
+    },
+    {
+        "user": "nica",
+        "title": "Yona of the Dawn",
+        "adminApproval": false
+    },
+    {
+        "user": "client",
+        "title": "Anata",
+        "adminApproval": false
+    },
+    {
+        "user": "client",
+        "title": "Nier",
+        "adminApproval": false
+    }
+]
