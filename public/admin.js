@@ -14,7 +14,7 @@ function updateBookLists() {
                 newBook.classList.add('book');
                 bookLists.appendChild(newBook);
                 const bookP = document.createElement('p');
-                bookP.textContent = '0' + numbering + ' ' + book.title + ' x' + book.copies;
+                bookP.textContent = '0' + numbering + ' ' + book.title;
                 newBook.appendChild(bookP);
                 const bookBtn = document.createElement('button');
                 bookBtn.textContent = 'DELETE';

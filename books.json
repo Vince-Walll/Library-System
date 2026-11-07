@@ -1,1 +1,177 @@
-[{"title":"Frieren: Beyond Journey's End","author":"Kanehito Yamada","genre":"Manga","read":"The story begins where most fantasy adventures usually end. The Heros party has already defeated the Demon King, saving the world. Now, the adventure is over, and the party members go their separate ways.","available":false},{"title":"The Ancient Magus Bride","author":"Kore Yamazaki","genre":"Fantasy","read":"Chise Hatori, a neglected teenage orphan who can see terrifying supernatural creatures, decides to sell herself at an underground auction out of sheer despair. She is bought for an immense sum by Elias Ainsworth, a towering, non-human sorcerer with a beastly animal skull for a head.","available":false},{"title":"Yona of the Dawn","author":"Mizuho Kusanagi","genre":"Romance","read":"Princess Yona lives a sheltered, luxurious life in her kingdom until her beloved cousin commits a bloody betrayal, murdering her father to steal the throne on her sixteenth birthday. Forced to flee the palace overnight, she must learn to survive in a harsh, war-torn world.","available":false},{"title":"Anata","author":"Yumi Tamura","genre":"Fantasy","read":"In a futuristic, post-apocalyptic Japan ruled by tyrannical royal tyrants, a prophecy foretells that a child born in a small village will become the \"Chosen One\" to overthrow the monarchy. When the village hero is brutally murdered, his twin sister cuts her hair and assumes his identity to lead the rebellion.","available":false},{"title":"Nier","author":"Natsumi Mukai","genre":"Manga","read":"In a medieval fantasy world, there exist outcasts called \"+Anima\"—humans who possess the magical ability to transform parts of their bodies into animal traits (like bird wings, bear claws, or fish gills). They are feared, treated as monsters, or sold into slavery by normal humans.","available":false}]
+[
+    {
+        "title": "Frieren: Beyond Journey's End",
+        "author": "Kanehito Yamada",
+        "genre": "Manga",
+        "read": "The story begins where most fantasy adventures usually end. The Heros party has already defeated the Demon King, saving the world. Now, the adventure is over, and the party members go their separate ways.",
+        "available": true
+    },
+    {
+        "title": "The Ancient Magus Bride",
+        "author": "Kore Yamazaki",
+        "genre": "Fantasy",
+        "read": "Chise Hatori, a neglected teenage orphan who can see terrifying supernatural creatures, decides to sell herself at an underground auction out of sheer despair. She is bought for an immense sum by Elias Ainsworth, a towering, non-human sorcerer with a beastly animal skull for a head.",
+        "available": true
+    },
+    {
+        "title": "Yona of the Dawn",
+        "author": "Mizuho Kusanagi",
+        "genre": "Romance",
+        "read": "Princess Yona lives a sheltered, luxurious life in her kingdom until her beloved cousin commits a bloody betrayal, murdering her father to steal the throne on her sixteenth birthday. Forced to flee the palace overnight, she must learn to survive in a harsh, war-torn world.",
+        "available": true
+    },
+    {
+        "title": "Anata",
+        "author": "Yumi Tamura",
+        "genre": "Fantasy",
+        "read": "In a futuristic, post-apocalyptic Japan ruled by tyrannical royal tyrants, a prophecy foretells that a child born in a small village will become the \"Chosen One\" to overthrow the monarchy. When the village hero is brutally murdered, his twin sister cuts her hair and assumes his identity to lead the rebellion.",
+        "available": true
+    },
+    {
+        "title": "Nier",
+        "author": "Natsumi Mukai",
+        "genre": "Manga",
+        "read": "In a medieval fantasy world, there exist outcasts called \"+Anima\"—humans who possess the magical ability to transform parts of their bodies into animal traits (like bird wings, bear claws, or fish gills). They are feared, treated as monsters, or sold into slavery by normal humans.",
+        "available": true
+    },
+    {
+        "title": "One Piece",
+        "author": "Eiichiro Oda",
+        "read": "A cheerful young pirate sets out to find the legendary treasure and become king of the seas. He gathers a loud, loyal crew along the way.",
+        "genre": "Manga",
+        "available": true
+    },
+    {
+        "title": "Fullmetal Alchemist",
+        "author": "Hiromu Arakawa",
+        "read": "Two brothers use alchemy to try to undo a terrible mistake. Their search leads them into the secrets of the country they live in.",
+        "genre": "Manga",
+        "available": true
+    },
+    {
+        "title": "Death Note",
+        "author": "Tsugumi Ohba",
+        "read": "A student finds a notebook that can end lives, and decides to use it to reshape the world. A brilliant detective starts closing in.",
+        "genre": "Manga",
+        "available": true
+    },
+    {
+        "title": "Vinland Saga",
+        "author": "Makoto Yukimura",
+        "read": "A young Viking grows up in a world of raids and revenge. Slowly he starts asking what a life without fighting could look like.",
+        "genre": "Manga",
+        "available": true
+    },
+    {
+        "title": "Chainsaw Man",
+        "author": "Tatsuki Fujimoto",
+        "read": "A broke young man teams up with a devil and becomes a monster hunter. His simple dreams collide with a very strange job.",
+        "genre": "Manga",
+        "available": true
+    },
+    {
+        "title": "Vagabond",
+        "author": "Takehiko Inoue",
+        "read": "A wandering swordsman travels Japan in search of strength. Along the way he has to face who he really is.",
+        "genre": "Manga",
+        "available": true
+    },
+    {
+        "title": "Monster",
+        "author": "Naoki Urasawa",
+        "read": "A doctor saves a boy and later learns what the boy grew up to become. He then spends years trying to put things right.",
+        "genre": "Manga",
+        "available": true
+    },
+    {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "read": "A quiet homebody is pulled into an adventure with a band of dwarves. Their goal is a mountain guarded by a dragon.",
+        "genre": "Fantasy",
+        "available": true
+    },
+    {
+        "title": "A Wizard of Earthsea",
+        "author": "Ursula K. Le Guin",
+        "read": "A proud young wizard in training makes a costly mistake. He has to travel across the sea to face what he released.",
+        "genre": "Fantasy",
+        "available": true
+    },
+    {
+        "title": "The Name of the Wind",
+        "author": "Patrick Rothfuss",
+        "read": "An innkeeper with a hidden past tells the story of his own life. It starts with a travelling troupe and a gifted, stubborn boy.",
+        "genre": "Fantasy",
+        "available": true
+    },
+    {
+        "title": "Mistborn: The Final Empire",
+        "author": "Brandon Sanderson",
+        "read": "In a land ruled by an immortal emperor, a street thief learns she has rare powers. A crew of rebels plans a heist on a whole empire.",
+        "genre": "Fantasy",
+        "available": true
+    },
+    {
+        "title": "Howl's Moving Castle",
+        "author": "Diana Wynne Jones",
+        "read": "A hat maker is cursed and takes shelter in a wizard's walking castle. Life there turns out to be messy, funny, and full of secrets.",
+        "genre": "Fantasy",
+        "available": true
+    },
+    {
+        "title": "Delicious in Dungeon",
+        "author": "Ryoko Kui",
+        "read": "A party of adventurers falls short in a dungeon, and the survivors decide to cook the monsters. It mixes fantasy, humor, and a lot of food.",
+        "genre": "Fantasy",
+        "available": true
+    },
+    {
+        "title": "Mushishi",
+        "author": "Yuki Urushibara",
+        "read": "A traveler studies strange life forms that most people cannot see. Each chapter is a quiet, self-contained story.",
+        "genre": "Fantasy",
+        "available": true
+    },
+    {
+        "title": "Fruits Basket",
+        "author": "Natsuki Takaya",
+        "read": "A kind high school girl ends up living with a family that hides a strange secret. Her warmth slowly changes everyone around her.",
+        "genre": "Romance",
+        "available": true
+    },
+    {
+        "title": "Ao Haru Ride",
+        "author": "Io Sakisaka",
+        "read": "A girl meets her first crush again in high school, but he has changed. They have to work out what happened in between.",
+        "genre": "Romance",
+        "available": true
+    },
+    {
+        "title": "Kimi ni Todoke",
+        "author": "Karuho Shiina",
+        "read": "A shy girl who is misunderstood by her classmates befriends the most popular boy in school. A gentle story about learning to speak up.",
+        "genre": "Romance",
+        "available": true
+    },
+    {
+        "title": "Ouran High School Host Club",
+        "author": "Bisco Hatori",
+        "read": "A scholarship student breaks a vase in a school club of wealthy boys and is made to work off the debt. Comedy and slow-burning feelings follow.",
+        "genre": "Romance",
+        "available": true
+    },
+    {
+        "title": "Skip Beat!",
+        "author": "Yoshiki Nakamura",
+        "read": "A girl who gave up everything for a famous friend gets dumped and decides to take revenge by joining show business.",
+        "genre": "Romance",
+        "available": true
+    },
+    {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "read": "A sharp-witted young woman and a proud, wealthy man misjudge each other. A classic about first impressions and second thoughts.",
+        "genre": "Romance",
+        "available": true
+    }
+]
